@@ -20,7 +20,7 @@ func TestBeginTxCancel(t *testing.T) {
 	srcTempFilename := TempFilename(t)
 	defer os.Remove(srcTempFilename)
 
-	db, err := sql.Open("sqlite3", srcTempFilename)
+	db, err := sql.Open"mysqlite3", srcTempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -79,7 +79,7 @@ func TestBeginTxCancel(t *testing.T) {
 }
 
 func TestStmtReadonly(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}

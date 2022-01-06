@@ -47,7 +47,7 @@ func doTestOpen(t *testing.T, option string) (string, error) {
 		}
 	}()
 
-	db, err := sql.Open("sqlite3", url)
+	db, err := sql.Open"mysqlite3", url)
 	if err != nil {
 		return "Failed to open database:", err
 	}
@@ -110,7 +110,7 @@ func TestOpenWithVFS(t *testing.T) {
 	}
 	defer os.Remove(filename)
 
-	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?vfs=hello", filename))
+	db, err := sql.Open"mysqlite3", fmt.Sprintf("file:%s?vfs=hello", filename))
 	if err != nil {
 		t.Fatal("Failed to open", err)
 	}
@@ -128,7 +128,7 @@ func TestOpenWithVFS(t *testing.T) {
 	} else {
 		vfs = "unix-none"
 	}
-	db, err = sql.Open("sqlite3", fmt.Sprintf("file:%s?vfs=%s", filename, vfs))
+	db, err = sql.Open"mysqlite3", fmt.Sprintf("file:%s?vfs=%s", filename, vfs))
 	if err != nil {
 		t.Fatal("Failed to open", err)
 	}
@@ -150,7 +150,7 @@ func TestOpenNoCreate(t *testing.T) {
 	// https://golang.org/pkg/database/sql/#Open
 	// "Open may just validate its arguments without creating a connection
 	// to the database. To verify that the data source name is valid, call Ping."
-	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?mode=rw", filename))
+	db, err := sql.Open"mysqlite3", fmt.Sprintf("file:%s?mode=rw", filename))
 	if err == nil {
 		defer db.Close()
 
@@ -178,7 +178,7 @@ func TestOpenNoCreate(t *testing.T) {
 	}
 
 	// verify that it works if the mode is "rwc" instead
-	db, err = sql.Open("sqlite3", fmt.Sprintf("file:%s?mode=rwc", filename))
+	db, err = sql.Open"mysqlite3", fmt.Sprintf("file:%s?mode=rwc", filename))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,13 +201,13 @@ func TestReadonly(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
 
-	db1, err := sql.Open("sqlite3", "file:"+tempFilename)
+	db1, err := sql.Open"mysqlite3", "file:"+tempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
 	db1.Exec("CREATE TABLE test (x int, y float)")
 
-	db2, err := sql.Open("sqlite3", "file:"+tempFilename+"?mode=ro")
+	db2, err := sql.Open"mysqlite3", "file:"+tempFilename+"?mode=ro")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +226,7 @@ func TestForeignKeys(t *testing.T) {
 	for option, want := range cases {
 		fname := TempFilename(t)
 		uri := "file:" + fname + option
-		db, err := sql.Open("sqlite3", uri)
+		db, err := sql.Open"mysqlite3", uri)
 		if err != nil {
 			os.Remove(fname)
 			t.Errorf("sql.Open(\"sqlite3\", %q): %v", uri, err)
@@ -255,7 +255,7 @@ func TestRecursiveTriggers(t *testing.T) {
 	for option, want := range cases {
 		fname := TempFilename(t)
 		uri := "file:" + fname + option
-		db, err := sql.Open("sqlite3", uri)
+		db, err := sql.Open"mysqlite3", uri)
 		if err != nil {
 			os.Remove(fname)
 			t.Errorf("sql.Open(\"sqlite3\", %q): %v", uri, err)
@@ -279,7 +279,7 @@ func TestRecursiveTriggers(t *testing.T) {
 func TestClose(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -305,7 +305,7 @@ func TestClose(t *testing.T) {
 func TestInsert(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -348,7 +348,7 @@ func TestUpsert(t *testing.T) {
 	}
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -393,7 +393,7 @@ func TestUpsert(t *testing.T) {
 func TestUpdate(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -458,7 +458,7 @@ func TestUpdate(t *testing.T) {
 func TestDelete(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -519,7 +519,7 @@ func TestDelete(t *testing.T) {
 func TestBooleanRoundtrip(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -570,7 +570,7 @@ func timezone(t time.Time) string { return t.Format("-07:00") }
 func TestTimestamp(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -672,7 +672,7 @@ func TestTimestamp(t *testing.T) {
 func TestBoolean(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -764,7 +764,7 @@ func TestBoolean(t *testing.T) {
 func TestFloat32(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -801,7 +801,7 @@ func TestFloat32(t *testing.T) {
 func TestNull(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -832,7 +832,7 @@ func TestNull(t *testing.T) {
 func TestTransaction(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -891,7 +891,7 @@ func TestTransaction(t *testing.T) {
 func TestWAL(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -939,7 +939,7 @@ func TestTimezoneConversion(t *testing.T) {
 	for _, tz := range zones {
 		tempFilename := TempFilename(t)
 		defer os.Remove(tempFilename)
-		db, err := sql.Open("sqlite3", tempFilename+"?_loc="+url.QueryEscape(tz))
+		db, err := sql.Open"mysqlite3", tempFilename+"?_loc="+url.QueryEscape(tz))
 		if err != nil {
 			t.Fatal("Failed to open database:", err)
 		}
@@ -1035,7 +1035,7 @@ func TestTimezoneConversion(t *testing.T) {
 func TestExecer(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1055,7 +1055,7 @@ func TestExecer(t *testing.T) {
 func TestQueryer(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1096,7 +1096,7 @@ func TestQueryer(t *testing.T) {
 func TestStress(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1106,7 +1106,7 @@ func TestStress(t *testing.T) {
 	db.Close()
 
 	for i := 0; i < 10000; i++ {
-		db, err := sql.Open("sqlite3", tempFilename)
+		db, err := sql.Open"mysqlite3", tempFilename)
 		if err != nil {
 			t.Fatal("Failed to open database:", err)
 		}
@@ -1135,7 +1135,7 @@ func TestDateTimeLocal(t *testing.T) {
 	zone := "Asia/Tokyo"
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename+"?_loc="+zone)
+	db, err := sql.Open"mysqlite3", tempFilename+"?_loc="+zone)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1153,7 +1153,7 @@ func TestDateTimeLocal(t *testing.T) {
 	}
 	db.Close()
 
-	db, err = sql.Open("sqlite3", tempFilename)
+	db, err = sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1178,7 +1178,7 @@ func TestDateTimeLocal(t *testing.T) {
 	db.Exec("INSERT INTO foo VALUES(?);", dt)
 
 	db.Close()
-	db, err = sql.Open("sqlite3", tempFilename+"?_loc="+zone)
+	db, err = sql.Open"mysqlite3", tempFilename+"?_loc="+zone)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1203,7 +1203,7 @@ func TestVersion(t *testing.T) {
 func TestStringContainingZero(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1263,7 +1263,7 @@ func (t TimeStamp) Value() (driver.Value, error) {
 func TestDateTimeNow(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1605,7 +1605,7 @@ func TestDeclTypes(t *testing.T) {
 }
 
 func TestPinger(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1723,7 +1723,7 @@ func TestAuthorizer(t *testing.T) {
 }
 
 func TestNonColumnString(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1743,7 +1743,7 @@ func TestNonColumnString(t *testing.T) {
 }
 
 func TestNilAndEmptyBytes(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1798,7 +1798,7 @@ func TestNilAndEmptyBytes(t *testing.T) {
 }
 
 func TestInsertNilByteSlice(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1819,7 +1819,7 @@ func TestInsertNilByteSlice(t *testing.T) {
 func TestNamedParam(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -1928,7 +1928,7 @@ var db *TestDB
 
 func initializeTestDB(t testing.TB) {
 	tempFilename := TempFilename(t)
-	d, err := sql.Open("sqlite3", tempFilename+"?_busy_timeout=99999")
+	d, err := sql.Open"mysqlite3", tempFilename+"?_busy_timeout=99999")
 	if err != nil {
 		os.Remove(tempFilename)
 		t.Fatal(err)

@@ -20,7 +20,7 @@ func TestUnlockNotify(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
 	dsn := fmt.Sprintf("file:%s?cache=shared&mode=rwc&_busy_timeout=%d", tempFilename, 500)
-	db, err := sql.Open("sqlite3", dsn)
+	db, err := sql.Open"mysqlite3", dsn)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -80,7 +80,7 @@ func TestUnlockNotifyMany(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
 	dsn := fmt.Sprintf("file:%s?cache=shared&mode=rwc&_busy_timeout=%d", tempFilename, 500)
-	db, err := sql.Open("sqlite3", dsn)
+	db, err := sql.Open"mysqlite3", dsn)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -146,7 +146,7 @@ func TestUnlockNotifyDeadlock(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
 	dsn := fmt.Sprintf("file:%s?cache=shared&mode=rwc&_busy_timeout=%d", tempFilename, 500)
-	db, err := sql.Open("sqlite3", dsn)
+	db, err := sql.Open"mysqlite3", dsn)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}

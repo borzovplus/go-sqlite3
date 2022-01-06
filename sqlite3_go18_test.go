@@ -22,7 +22,7 @@ import (
 func TestNamedParams(t *testing.T) {
 	tempFilename := TempFilename(t)
 	defer os.Remove(tempFilename)
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("Failed to open database:", err)
 	}
@@ -115,7 +115,7 @@ func TestShortTimeout(t *testing.T) {
 	srcTempFilename := TempFilename(t)
 	defer os.Remove(srcTempFilename)
 
-	db, err := sql.Open("sqlite3", srcTempFilename)
+	db, err := sql.Open"mysqlite3", srcTempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +140,7 @@ func TestExecContextCancel(t *testing.T) {
 	srcTempFilename := TempFilename(t)
 	defer os.Remove(srcTempFilename)
 
-	db, err := sql.Open("sqlite3", srcTempFilename)
+	db, err := sql.Open"mysqlite3", srcTempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +184,7 @@ func TestQueryRowContextCancel(t *testing.T) {
 	srcTempFilename := TempFilename(t)
 	defer os.Remove(srcTempFilename)
 
-	db, err := sql.Open("sqlite3", srcTempFilename)
+	db, err := sql.Open"mysqlite3", srcTempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +218,7 @@ func TestQueryRowContextCancelParallel(t *testing.T) {
 	srcTempFilename := TempFilename(t)
 	defer os.Remove(srcTempFilename)
 
-	db, err := sql.Open("sqlite3", srcTempFilename)
+	db, err := sql.Open"mysqlite3", srcTempFilename)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +268,7 @@ func TestQueryRowContextCancelParallel(t *testing.T) {
 }
 
 func TestExecCancel(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open"mysqlite3", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +299,7 @@ func doTestOpenContext(t *testing.T, option string) (string, error) {
 		}
 	}()
 
-	db, err := sql.Open("sqlite3", url)
+	db, err := sql.Open"mysqlite3", url)
 	if err != nil {
 		return "Failed to open database:", err
 	}
@@ -371,7 +371,7 @@ func TestFileCopyTruncate(t *testing.T) {
 		}
 	}()
 
-	db, err := sql.Open("sqlite3", tempFilename)
+	db, err := sql.Open"mysqlite3", tempFilename)
 	if err != nil {
 		t.Fatal("open error:", err)
 	}
@@ -468,7 +468,7 @@ func TestFileCopyTruncate(t *testing.T) {
 	}
 
 	// test copied file
-	db, err = sql.Open("sqlite3", tempFilename+"-db-copy")
+	db, err = sql.Open"mysqlite3", tempFilename+"-db-copy")
 	if err != nil {
 		t.Fatal("open error:", err)
 	}

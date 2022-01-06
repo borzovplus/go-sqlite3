@@ -37,7 +37,7 @@ func TestCorruptDbErrors(t *testing.T) {
 	f.Write([]byte{1, 2, 3, 4, 5})
 	f.Close()
 
-	db, err := sql.Open("sqlite3", dbFileName)
+	db, err := sql.Open"mysqlite3", dbFileName)
 	if err == nil {
 		_, err = db.Exec("drop table foo")
 	}
@@ -60,7 +60,7 @@ func TestSqlLogicErrors(t *testing.T) {
 	defer os.RemoveAll(dirName)
 
 	dbFileName := path.Join(dirName, "test.db")
-	db, err := sql.Open("sqlite3", dbFileName)
+	db, err := sql.Open"mysqlite3", dbFileName)
 	if err != nil {
 		t.Error(err)
 	}
@@ -87,7 +87,7 @@ func TestExtendedErrorCodes_ForeignKey(t *testing.T) {
 	defer os.RemoveAll(dirName)
 
 	dbFileName := path.Join(dirName, "test.db")
-	db, err := sql.Open("sqlite3", dbFileName)
+	db, err := sql.Open"mysqlite3", dbFileName)
 	if err != nil {
 		t.Error(err)
 	}
@@ -133,7 +133,7 @@ func TestExtendedErrorCodes_NotNull(t *testing.T) {
 	defer os.RemoveAll(dirName)
 
 	dbFileName := path.Join(dirName, "test.db")
-	db, err := sql.Open("sqlite3", dbFileName)
+	db, err := sql.Open"mysqlite3", dbFileName)
 	if err != nil {
 		t.Error(err)
 	}
@@ -189,7 +189,7 @@ func TestExtendedErrorCodes_Unique(t *testing.T) {
 	defer os.RemoveAll(dirName)
 
 	dbFileName := path.Join(dirName, "test.db")
-	db, err := sql.Open("sqlite3", dbFileName)
+	db, err := sql.Open"mysqlite3", dbFileName)
 	if err != nil {
 		t.Error(err)
 	}
@@ -249,7 +249,7 @@ func TestError_SystemErrno(t *testing.T) {
 	}
 
 	// open a non-existent database in read-only mode so we get an IO error.
-	db, err := sql.Open("sqlite3", "file:nonexistent.db?mode=ro")
+	db, err := sql.Open"mysqlite3", "file:nonexistent.db?mode=ro")
 	if err != nil {
 		t.Fatal(err)
 	}
