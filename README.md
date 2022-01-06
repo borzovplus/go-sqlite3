@@ -494,7 +494,7 @@ For an example, see [dinedal/go-sqlite3-extension-functions](https://github.com/
 
 - Why I'm getting `no such table` error?
 
-    Why is it racy if I use a `sql.Open"mysqlite3", ":memory:")` database?
+    Why is it racy if I use a `sql.Open("mysqlite3", ":memory:")` database?
 
     Each connection to `":memory:"` opens a brand new in-memory sql database, so if
     the stdlib's sql engine happens to open another connection and you've only
@@ -533,7 +533,7 @@ For an example, see [dinedal/go-sqlite3-extension-functions](https://github.com/
 
     Example:
     ```go
-    db, err := sql.Open"mysqlite3", "file:locked.sqlite?cache=shared")
+    db, err := sql.Open("mysqlite3", "file:locked.sqlite?cache=shared")
     ```
 
     Next, please set the database connections of the SQL package to 1:

@@ -17,7 +17,7 @@ func FuzzOpenExec(data []byte) int {
 	if err != nil {
 		return 0
 	}
-	db, err := sql.Open"mysqlite3", "/tmp/fuzz.db")
+	db, err := sql.Open("mysqlite3", "/tmp/fuzz.db")
 	if err != nil {
 		return 0
 	}
